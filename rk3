@@ -12,7 +12,7 @@
         }
 
         .selected {
-            background-color: #44bd32;
+            background-color: #E0FFFF;
         }
 
         .unselected {
@@ -25,20 +25,20 @@
     </style>
 </head>
 <body>
-    <h1>Деревo</h1>
+    <h1>�����o</h1>
     <form name="tree1">
         <input type="button" id="createElem" value="Создать">
         <input type="button" id="renameElem" value="Переименовать">
         <input type="button" id="deleteElem" value="Удалить">
     </form>
     <br><br>
-    <div id="main_tree" class="unselected">Корневой элемент</div>
+    <div id="main_tree" class="unselected">�������� �������</div>
 
-    <script>let current_task_Item=null;                 // Текущий элемент
+    <script>let current_task_Item = null;                 //Текущий элемент
 
         let main_div = document.get_Element_by_id("main_tree");
 
-        main_div.addEventListener("click",selected);    // Вешаем обработчик событий на Главный элемент Дерева
+        main_div.addEventListener("click", selected);    //Вешаем обработчик событий на Главный элемент Дерева
 
         
 
@@ -90,7 +90,7 @@
 
         }
 
-        //Общая функция по скрытию/показа детей   hide_form
+        //Общая функция по скрытию/показа детей hide_form
         function hide_form(img_element){
             let attr = img_element.getAttribute("src");
             if(attr == "minus.png"){
@@ -106,7 +106,7 @@
             }
         }
 
-        //Функция по скрытию дочерних элементов       hide
+        //Функция по скрытию дочерних элементов hide
         function hide(elems){
             for(let i=0; i<elems.children.length; i++){
                 if(elems.children[i].tagName === "IMG"){
