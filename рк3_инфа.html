@@ -37,21 +37,21 @@
     <script>
         let current_task_Item = null;                    //Текущий элемент
 
-        let main_div = document.get_Element_by_id("main_tree");
+        let main_div = document.getElementById("main_tree");
 
         main_div.addEventListener("click", selected);    //Вешаем обработчик событий на Главный элемент Дерева
 
         
 
         //Функция по выделению элемента selected в самом конце
-        let createBtn = document.get_Element_by_id("createElem");
+        let createBtn = document.getElementById("createElem");
         createBtn.addEventListener("click", createElement)
 
-        let renameBtn = document.get_Element_by_id("renameElem");
+        let renameBtn = document.getElementById("renameElem");
         renameBtn.addEventListener("click",renameElement);
 
 
-        let deleteBtn = document.get_Element_by_id("deleteElem");
+        let deleteBtn = document.getElementById("deleteElem");
         deleteBtn.addEventListener("click", function(){deleteElement()})
 
 
