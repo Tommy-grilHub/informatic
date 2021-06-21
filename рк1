@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int check(char* input, char* dict) {
+    int i;
+    for (i = 0; input[i] != '\0' && dict[i] != '\0'; i++) {
+        if (input[i] != dict[i]) {
+            return NULL;
+        }
+    }
+    return 1;
+}
+
+int main()
+{
+    FILE* dict;
+    if ((dict = fopen("dict.txt", "r")) == NULL) {
+        printf("Could not open dict");
+    };
+
+    FILE* input;
+
+    if ((input = fopen("input.txt", "r")) == NULL) {
+        printf("Could not open input");
+    }
+
+    FILE* output = fopen("output.txt", "w");;
+
+    int warning = 0;
+    char ch;
+    while ((ch = getc(input)) != EOF) {
+
+        char* letters = (char*)malloc(50 * sizeof(char));
+        if (letters == NULL) printf("!ERROR!");
+
+        int i = 0;
+        while ((ch != ' ') && (ch != EOF) && (ch != ';') && (ch != '\n') && (ch != '-')) {
+            letters[i] = ch;
+            ch = getc(input);
+            i++;
+        }
+        letters[i] = '\0';
+
+        int dict_state = 0;
+        while ((ch = getc(dict)) != EOF) {
+            char* dict_word = (char*)malloc(50 * sizeof(char));
+            int j = 0;
+            while ((ch != '\n') && (ch != EOF)) {
+                dict_word[j] = ch;
+                ch = getc(dict);
+                j++;
+            }
+            dict_word[i] = '\0';
+            if (check(letters, dict_word)) {
+                dict_state = 1;
+            }
+            free(dict_word);
+        }
+        if (!dict_state) {
+            warning = 1;
+            output = fopen("output.txt", "a+");
+            int repeat_state = 0;
+            while ((ch = getc(output)) != EOF) {
+                char* repeat = (char*)malloc(50 * sizeof(char));
+                int m = 0;
+                while ((ch != ' ') && (ch != EOF)) {
+                    repeat[m] = ch;
+                    ch = getc(output);
+                    m++;
+                }
+                if ((check(letters, repeat))) repeat_state++;
+            }
+            if (repeat_state == 0) {
+                fputs(letters, output);
+                fputc(' ', output);
+                fclose(output);
+            }
+        }
+        free(letters);
+        rewind(dict);
+        dict_state = 0;
+    }
+    if (warning) printf("WARNING");
+    else printf("OK");
+    return 0;
+}
